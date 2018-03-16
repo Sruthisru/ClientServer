@@ -1,23 +1,21 @@
-import java.io.*;
-import java.net.*;
-
-
-class Server {
- public static void main(String argv[]) throws Exception {
-  String clientSentence;
-  String capitalizedSentence;
-  ServerSocket welcomeSocket = new ServerSocket(6789);
-
-  while (true) {
-   Socket connectionSocket = welcomeSocket.accept();
-   BufferedReader inFromClient =
-    new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-   DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-   clientSentence = inFromClient.readLine();
-   System.out.println("Received: " + clientSentence);
-   capitalizedSentence = clientSentence.toUpperCase() + '\n';
-   outToClient.writeBytes(capitalizedSentence);
+import java.net.*;            
+import java.io.InputStream;
+import java.io.DataInputStream;
+ 
+public class WishesServer
+{
+   public static void main(String args[]) throws Exception
+   {
+     ServerSocket sersock = new ServerSocket(5000); 
+     System.out.println("server is ready");  //  message to know the server is running
+ 
+     Socket sock = sersock.accept();               
+                                                                                          
+     InputStream istream = sock.getInputStream();  
+     DataInputStream dstream = new DataInputStream(istream);
+ 
+     String message2 = dstream.readLine();
+     System.out.println(message2);
+     dstream .close(); istream.close(); sock.close(); sersock.close();
   }
- }
 }
-

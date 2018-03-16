@@ -1,21 +1,22 @@
-import java.net.*;            
-import java.io.InputStream;
-import java.io.DataInputStream;
- 
-public class Server
-{
-   public static void main(String args[]) throws Exception
-   {
-     ServerSocket sersock = new ServerSocket(5000); 
-     System.out.println("server is ready");  //  message to know the server is running
- 
-     Socket sock = sersock.accept();               
-                                                                                          
-     InputStream istream = sock.getInputStream();  
-     DataInputStream dstream = new DataInputStream(istream);
- 
-     String message2 = dstream.readLine();
-     System.out.println(message2);
-     dstream .close(); istream.close(); sock.close(); sersock.close();
-  }
-}
+import java.net.*;  
+import java.io.*;  
+class Server{  
+public static void main(String args[])throws Exception{  
+ServerSocket ss=new ServerSocket(3333);  
+Socket s=ss.accept();  
+DataInputStream din=new DataInputStream(s.getInputStream());  
+DataOutputStream dout=new DataOutputStream(s.getOutputStream());  
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+  
+ String str="",str2="";  
+while(!str.equals("stop")){  
+str=din.readUTF();  
+System.out.println("client says: "+str);  
+str2=br.readLine();  
+dout.writeUTF(str2);  
+dout.flush();  
+}  
+din.close();  
+s.close();  
+ss.close();  
+}}  

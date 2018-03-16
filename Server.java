@@ -2,7 +2,7 @@ import java.net.*;
 import java.io.InputStream;
 import java.io.DataInputStream;
  
-public class WishesServer
+public class Server
 {
    public static void main(String args[]) throws Exception
    {

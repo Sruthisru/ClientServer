@@ -2,7 +2,7 @@ import java.net.*;
 import java.io.OutputStream;
 import java.io.DataOutputStream;
  
-public class WishesClient
+public class Client
 {
    public static void main(String args[]) throws Exception
    {

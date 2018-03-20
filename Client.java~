@@ -1,21 +1,21 @@
-import java.net.*; 
-import java.io.OutputStream;
-import java.io.DataOutputStream;
- 
-public class Client
-{
-   public static void main(String args[]) throws Exception
-   {
-     Socket sock = new Socket("localhost", 5000);
-	InetAddress ip=sock.getInetAddress();
-	System.out.println(ip);       
-     String message1 = "Accept Best Wishes, Server";
- 
-     OutputStream ostream = sock.getOutputStream();                 
-     DataOutputStream dos = new DataOutputStream(ostream);
-     dos.writeBytes(message1);                                                         
-     dos.close();                            
-     ostream.close();   
-     sock.close();
-  }
-}
+import java.net.*;  
+import java.io.*;  
+class Client{  
+public static void main(String args[])throws Exception{  
+Socket s=new Socket("localhost",3333);  
+DataInputStream din=new DataInputStream(s.getInputStream());  
+DataOutputStream dout=new DataOutputStream(s.getOutputStream());  
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+  
+String str="",str2="";  
+while(!str.equals("stop")){  
+str=br.readLine();  
+dout.writeUTF(str);  
+dout.flush();  
+str2=din.readUTF();  
+System.out.println("Server says: "+str2);  
+}  
+  
+dout.close();  
+s.close();  
+}}  
